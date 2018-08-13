@@ -246,10 +246,10 @@ class fauxmo(upnp_device):
         else:
             dbg(data)
 
-    def open(self):
+    def on(self):
         return False
 
-    def close(self):
+    def off(self):
         return True
 
 
@@ -345,26 +345,26 @@ class dummy_handler(object):
     def __init__(self, name):
         self.name = name
 
-    def open(self):
-        print self.name, "OPEN"
+    def on(self):
+        print self.name, "ON"
         return True
 
-    def close(self):
-        print self.name, "CLOSE"
+    def off(self):
+        print self.name, "OFF"
         return True
 
 
 class rest_api_handler(object):
-    def __init__(self, open_cmd, close_cmd):
-        self.open_cmd = open_cmd
-        self.close_cmd = close_cmd
+    def __init__(self, on_cmd, off_cmd):
+        self.on_cmd = on_cmd
+        self.off_cmd = off_cmd
 
-    def open(self):
-        r = requests.get(self.open_cmd)
+    def on(self):
+        r = requests.get(self.on_cmd)
         return r.status_code == 200
 
-    def close(self):
-        r = requests.get(self.close_cmd)
+    def off(self):
+        r = requests.get(self.off_cmd)
         return r.status_code == 200
 
 if __name__ == "__main__":
