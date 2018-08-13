@@ -9,12 +9,12 @@ class debounce_handler(object):
     def __init__(self):
         self.lastEcho = time.time()
 
-    def open(self, client_address, name):
+    def on(self, client_address, name):
         if self.debounce():
             return True
         return self.act(client_address, True, name)
 
-    def close(self, client_address, name):
+    def off(self, client_address, name):
         if self.debounce():
             return True
         return self.act(client_address, False, name)
@@ -33,4 +33,3 @@ class debounce_handler(object):
 
         self.lastEcho = time.time()
         return False
-
